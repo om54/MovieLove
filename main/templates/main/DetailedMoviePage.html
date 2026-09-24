@@ -1,15 +1,144 @@
-{% extends 'main/base.html' %}
+{% extends 'main/default.html' %}
 {% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/DetailedMoviePage.css' %}">
 {% endblock %}
 
-{% block title %}{{ movie.movieName }}{% endblock %}
+{% block title %}{{ movie.movieName }} - Movie Love{% endblock %}
 
 {% block content %}
-    <div class="movie-detail">
-        <h1>{{ movie.movieName }}</h1>
-        <p>{{ movie.movieDescription }}</p>
-        <!-- Add more movie details here -->
+<main class="movie-detail-page">
+    <a class="movie-back-link" href="{% url 'all-movies-list' %}">&larr; Back to all movies</a>
+
+    <section class="movie-hero">
+        <div class="movie-hero-art">
+            {% if movie.movieBanner %}
+            <img src="{{ movie.movieBanner.url }}" alt="{{ movie.movieName }} banner">
+            {% elif movie.movieSmallImage %}
+            <img src="{{ movie.movieSmallImage.url }}" alt="{{ movie.movieName }} poster">
+            {% else %}
+            <div class="movie-art-placeholder">No artwork available</div>
+            {% endif %}
+        </div>
+        <div class="movie-hero-copy">
+            <p class="movie-eyebrow">Movie profile</p>
+            <h1>{{ movie.movieName }}</h1>
+            <p class="movie-lede">A closer look at the cast, crew, music, and media for this movie.</p>
+            <dl class="movie-facts">
+                <div>
+                    <dt>Release date</dt>
+                    <dd>{{ movie.dateOfRelease|date:"F j, Y" }}</dd>
+                </div>
+                <div>
+                    <dt>Production</dt>
+                    <dd>{{ movie.movieProducer.ProductionHouseName }}</dd>
+                </div>
+            </dl>
+            <div class="movie-tags">
+                {% for genre in movie.movieGenre.all %}
+                <span>{{ genre.genreName }}</span>
+                {% empty %}
+                <span>Genre not listed</span>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <div class="movie-detail-grid">
+        <section class="detail-panel detail-panel-wide">
+            <div class="section-heading">
+                <p class="movie-eyebrow">On screen</p>
+                <h2>Cast and creative team</h2>
+            </div>
+            <div class="people-grid">
+                {% for person in movie.allCast.all %}
+                <article class="person-card">
+                    {% if person.castPhoto %}
+                    <img src="{{ person.castPhoto.url }}" alt="{{ person.castName }}">
+                    {% else %}
+                    <div class="person-placeholder">{{ person.castName|slice:":1" }}</div>
+                    {% endif %}
+                    <div>
+                        <h3>{{ person.castName }}</h3>
+                        <p>{% if person.isDirector %}Director{% else %}Cast{% endif %}</p>
+                    </div>
+                </article>
+                {% empty %}
+                <p class="empty-detail">Cast information has not been added yet.</p>
+                {% endfor %}
+            </div>
+            {% if movie.movieChoreographer.all %}
+            <div class="subsection">
+                <h3>Choreography</h3>
+                <p class="inline-list">{% for person in movie.movieChoreographer.all %}{{ person.choreographerName }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+            </div>
+            {% endif %}
+        </section>
+
+        <section class="detail-panel">
+            <div class="section-heading">
+                <p class="movie-eyebrow">Listen and watch</p>
+                <h2>Movie media</h2>
+            </div>
+            <div class="media-list">
+                {% for trailer in movie.movietrailer_set.all %}
+                <a class="media-link" href="{{ trailer.trailerLink }}" target="_blank" rel="noopener noreferrer">
+                    <span class="media-icon">&#9654;</span>
+                    <span><strong>Watch trailer</strong><small>{{ trailer.trailerLink }}</small></span>
+                </a>
+                {% endfor %}
+                {% for song in movie.moviesong_set.all %}
+                <a class="media-link" href="{{ song.songLink }}" target="_blank" rel="noopener noreferrer">
+                    <span class="media-icon">&#9835;</span>
+                    <span><strong>{{ song.songName }}</strong><small>Listen to song</small></span>
+                </a>
+                {% endfor %}
+                {% if not movie.movietrailer_set.all and not movie.moviesong_set.all %}
+                <p class="empty-detail">No trailers or songs have been added yet.</p>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="detail-panel detail-panel-wide">
+            <div class="section-heading">
+                <p class="movie-eyebrow">Audience notes</p>
+                <h2>Reviews</h2>
+            </div>
+            <div class="reviews-list">
+                {% for review in movie.moviereview_set.all %}
+                <article class="review-card">
+                    <div class="review-rating" aria-label="{{ review.starRating }} out of 5 stars">{% for star in "12345"|make_list %}{% if forloop.counter <= review.starRating %}&#9733;{% else %}&#9734;{% endif %}{% endfor %}</div>
+                    <p>{{ review.review }}</p>
+                </article>
+                {% empty %}
+                <p class="empty-detail">No reviews have been added yet.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="detail-panel detail-panel-wide review-form-panel">
+            <div class="section-heading">
+                <p class="movie-eyebrow">Share your take</p>
+                <h2>Add a review</h2>
+            </div>
+            <form method="post" class="review-form">
+                {% csrf_token %}
+                {% if review_form.non_field_errors %}
+                <div class="form-errors">{{ review_form.non_field_errors }}</div>
+                {% endif %}
+                <div class="review-form-rating">
+                    {{ review_form.starRating.label_tag }}
+                    {{ review_form.starRating }}
+                    {% if review_form.starRating.errors %}<p class="field-error">{{ review_form.starRating.errors|striptags }}</p>{% endif %}
+                </div>
+                <div class="review-form-message">
+                    {{ review_form.review.label_tag }}
+                    {{ review_form.review }}
+                    {% if review_form.review.errors %}<p class="field-error">{{ review_form.review.errors|striptags }}</p>{% endif %}
+                </div>
+                <button class="review-submit" type="submit">Publish review</button>
+            </form>
+        </section>
     </div>
+</main>
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.db import models
-from django.shortcuts import render
-from .form import ContactForm
+from django.shortcuts import get_object_or_404, redirect, render
+from .form import ContactForm, MovieReviewForm
 from .models import Movie
 
 # Create your views here.
@@ -51,8 +51,30 @@ def search(request):
 
 
 def MovieDetail(request, slug):
-    movie = Movie.objects.select_related('movieProducer').prefetch_related('movieGenre', 'allCast').get(movieNameSlug=slug)
+    movie = get_object_or_404(
+        Movie.objects.select_related('movieProducer').prefetch_related(
+            'movieGenre',
+            'allCast',
+            'movieMusic',
+            'movieChoreographer',
+            'movietrailer_set',
+            'moviesong_set',
+            'moviereview_set',
+        ),
+        movieNameSlug=slug,
+    )
+    if request.method == 'POST':
+        review_form = MovieReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.movie = movie
+            review.save()
+            return redirect('movie-detail', slug=movie.movieNameSlug)
+    else:
+        review_form = MovieReviewForm()
+
     context = {
-        'movie': movie
+        'movie': movie,
+        'review_form': review_form,
     }
-    return render(request, 'main/MovieDetail.html', context)
+    return render(request, 'main/DetailedMoviePage.html', context)

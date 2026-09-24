@@ -57,7 +57,7 @@ class Movie(models.Model):
         return f"{self.movieName} Date of release {self.dateOfRelease}"
     
     def get_absolute_url(self):
-        return reverse('article_detail', kwargs={'slug': self.movieNameSlug})
+        return reverse('movie-detail', kwargs={'slug': self.movieNameSlug})
 
     def save(self, *args, **kwargs):  # new
         if not self.movieNameSlug:

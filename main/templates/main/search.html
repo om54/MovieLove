@@ -27,6 +27,7 @@
     <div class="movies-grid">
         {% for movie in movies %}
         <article class="movie-card">
+            <a class="movie-card-link" href="{% url 'movie-detail' movie.movieNameSlug %}">
             <div class="movie-image-wrap">
                 {% if movie.movieSmallImage %}
                 <img src="{{ movie.movieSmallImage.url }}" alt="{{ movie.movieName }}" />
@@ -55,6 +56,7 @@
                     {% endif %}
                 </p>
             </div>
+            </a>
         </article>
         {% endfor %}
     </div>
