@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Snowburst+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap');
+
+:root {
+    --color-dark-blue: #0C2C55;
+    --color-warm-blue: #296374;
+    --color-light-sea-blue: #629FAD;
+    --color-light-bg: #EDEDCE;
+    --color-white: #fff;
+    --color-accent: #3399b8;
+
+    --font-titles: "Snowburst One", system-ui;
+    --font-secondary: "Stack Sans Notch", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}

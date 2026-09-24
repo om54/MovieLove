@@ -1,0 +1,38 @@
+{% extends 'main/default.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+{% block title %}Home - Movie Love{% endblock %}
+
+{% block content %}
+<section class="hero-container">
+    <div class="hero-text-side">
+        <span class="hero-tagline">Welcome to Movie Love</span>
+        <h1>Your Next Favorite Movie Is Waiting.</h1>
+        <p>Track your watchlist, rate your top picks, and dive deep into a world built exclusively for film lovers.</p>
+        <div class="hero-actions">
+            <a href="{% url 'all-movies-list' %}" class="btn-primary">Explore Movies</a>
+            <a href="#about" class="btn-secondary">Learn More</a>
+        </div>
+    </div>
+
+    <div class="hero-image-side">
+        <img src="{% static 'img/home-hero-image.jpg' %}" alt="Movie Love Hero Image">
+    </div>
+</section>
+
+
+<section class="about-section" id="about">
+    <div class="about-container">
+        <h2>About Movie Love</h2>
+        <p class="about-lead">Great cinema deserves to be shared. We built this platform as an open-source space where
+            film enthusiasts can track their journeys, rate their favorite releases, and discover hidden gems.</p>
+        <p>Because this project is completely open-source, it belongs to you just as much as it does to us. Whether you
+            want to suggest a new feature, tweak the code, or help us squash bugs, your voice and support drive our
+            evolution. Let’s build the ultimate community for people who breathe movies.</p>
+        <a href="#" class="btn-contribute">Contribute on GitHub</a>
+    </div>
+</section>
+{% endblock %}

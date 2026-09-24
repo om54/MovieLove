@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="shortcut icon" href="{% static 'img/ML.png' %}" type="image/x-icon">
+    {% block head %}{% endblock %}
+    <title>{% block title %}Movie Love{% endblock %}</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navtitle">
+            Movie Love
+        </div>
+        <ul class="navlist" id="navlinks">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'all-movies-list' %}">Rate Movies</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="#">Add New Features</a></li>
+        </ul>
+        <div class="searchbar">
+            <i class="fa fa-search" id="searchicon" style="margin-left: 3px;"></i>
+            <div class="hamburger" id="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div id="search-overlay" class="search-overlay"></div>
+    <div id="searchbar" class="floating-window">
+        <div class="window-header">
+            <span>Search movies</span>
+            <button class="close-btn" onclick="closeWindow()">×</button>
+        </div>
+        <div class="window-body">
+            <form method="get" action="{% url 'search' %}" class="search-form">
+                <input type="search" name="q" placeholder="Search movies, genres, cast..." aria-label="Search movies" required>
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            </form>
+            <p>Search for your favorite movie titles, genres, or cast members.</p>
+        </div>
+    </div>
+    {% block content %}
+    {% endblock %}
+    <footer>
+        <div class="footer">
+            <div class="title">
+                <h1>Movie Love</h1>
+                <p>Your ultimate space to discover, track, and rate your favorite films. Built by movie lovers, for
+                    movie
+                    lovers.</p>
+            </div>
+            <div class="links">
+                <h3>Menu</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="#">Rate Movies</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="links">
+                <h3>Other Links</h3>
+                <ul>
+                    <li><a href="#">Private Policy</a></li>
+                    <li><a href="#">Term and Conditions</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <center>&copy; Movie Love. All Rights Reserved.</center>
+        <div class="footer-image"></div>
+    </footer>
+
+    <script src="{% static 'main/default.js' %}"></script>
+</body>
+
+</html>

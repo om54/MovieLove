@@ -1,0 +1,57 @@
+{% extends 'main/default.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block title %}Contact us - Movie Love{% endblock %}
+
+{% block content %}
+<div class="contact-section" style="display: flex !important;">
+    <div class="left-contactpart">
+        <h3>CONTACT US</h3>
+        <h1>Movie Love</h1>
+        <p>Have a movie recommendation, found a bug, or want a new feature? We'd love to hear from you.</p>
+
+        <div class="info-item">
+            <i class="fa-solid fa-envelope"></i>
+            <a href="mailto:support@movielove.com">support@movielove.com</a>
+        </div>
+        <div class="info-item">
+            <i class="fa-solid fa-location-crosshairs"></i>
+            <span>Bhopal, India</span>
+        </div>
+        <div class="info-item">
+            <i class="fa-solid fa-star"></i>
+            <span>Reply within 24 hours</span>
+        </div>
+    </div>
+    <div class="right-contactpart">
+        <form method="post" class="contact-form">
+            {% csrf_token %}
+            <h2>Send a message</h2>
+            <p>Have a question or feedback? Use the form below and we'll get back to you soon.</p>
+
+            <div class="form-group">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                {{ form.topic.label_tag }}
+                {{ form.topic }}
+            </div>
+            <div class="form-group">
+                {{ form.message.label_tag }}
+                {{ form.message }}
+            </div>
+
+            <button type="submit" class="submit-button">Send Message</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

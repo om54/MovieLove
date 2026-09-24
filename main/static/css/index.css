@@ -1,0 +1,203 @@
+@import url('variables.css');
+
+.container {
+    padding: 20px;
+}
+
+/* hero section */
+/* Core Hero Layout Container */
+.hero-container {
+    display: flex;
+    align-items: center;        /* Perfectly aligns text and image vertically */
+    justify-content: space-between; 
+    padding: 30px 8%;
+    gap: 60px;
+    min-height: 75vh;
+    font-family: var(--font-secondary);
+}
+
+/* Typography Layout Side */
+.hero-text-side {
+    flex: 1.1;
+    max-width: 550px;
+}
+
+/* Little accent tag above the main headline */
+.hero-tagline {
+    display: inline-block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #0f4c75;             /* Navy accent to match your navbar */
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.hero-text-side h1 {
+    font-family: var(--font-titles); /* Pairs perfectly with your About header font */
+    font-size: 3.2rem;
+    line-height: 1.15;
+    color: #1b262c;             /* Deep rich dark color for crisp contrast */
+    margin-bottom: 20px;
+}
+
+.hero-text-side p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #4a4a4a;             /* Smooth readable dark grey */
+    margin-bottom: 35px;
+}
+
+/* Action Buttons */
+.hero-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-primary {
+    background: #0f4c75;
+    color: #ffffff;
+    padding: 14px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 15px rgba(15, 76, 117, 0.2);
+}
+
+.btn-primary:hover {
+    background: #3282b8;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px rgba(50, 130, 184, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #0f4c75;
+    padding: 14px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid #0f4c75;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(15, 76, 117, 0.05);
+    transform: translateY(-2px);
+}
+
+/* Image Presentation Side */
+.hero-image-side {
+    flex: 0.9;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image-side img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 24px;        /* Matches the curvature of your about box */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); /* Gives it depth over the cream background */
+    transition: transform 0.5s ease;
+}
+
+/* Subtle hover interaction for your cinema graphic */
+.hero-image-side img:hover {
+    transform: scale(1.02) rotate(3deg);
+}
+
+/* Fully Responsive Breakdown for Tablets/Phones */
+@media (max-width: 992px) {
+    .hero-container {
+        flex-direction: column-reverse; /* Stacks image nicely on top, text below on mobile */
+        text-align: center;
+        padding-top: 40px;
+        gap: 40px;
+    }
+    
+    .hero-text-side h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-actions {
+        justify-content: center;
+    }
+}
+
+/* about section */
+.about-section {
+    padding: 80px 10%;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    font-family: var(--font-secondary);
+}
+
+.about-container {
+    max-width: 800px;
+    text-align: center;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.315);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.about-container h2 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-family: var(--font-titles); /* Or your custom font */
+}
+
+.about-lead {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.about-container p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.btn-contribute {
+    display: inline-block;
+    background: #0f4c75;
+    color: #ffffff;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-contribute:hover {
+    background: #3282b8;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(50, 130, 184, 0.3);
+}
+
+/* Responsiveness */
+@media only screen and (max-width: 900px) {
+    .homehero {
+        display: block;
+        align-items: center;
+        /* Centers everything horizontally */
+        text-align: center;
+        /* Centers the actual lines of text */
+        justify-content: center;
+    }
+    .homehero .content {
+        max-width: 100%;
+        padding-bottom: 20px;
+    }
+}

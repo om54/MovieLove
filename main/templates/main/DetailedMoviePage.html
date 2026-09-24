@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/DetailedMoviePage.css' %}">
+{% endblock %}
+
+{% block title %}{{ movie.movieName }}{% endblock %}
+
+{% block content %}
+    <div class="movie-detail">
+        <h1>{{ movie.movieName }}</h1>
+        <p>{{ movie.movieDescription }}</p>
+        <!-- Add more movie details here -->
+    </div>
+{% endblock %}

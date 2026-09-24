@@ -1,0 +1,345 @@
+@import url('variables.css');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding-top: 120px;
+    background-color: var(--color-light-bg);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    /* 1. Keeps the navbar fixed at the top while you scroll */
+    position: fixed;
+    top: 20px;
+    /* Gives it that floating look you currently have */
+    left: 50%;
+    /* Centers it horizontally depending on your width */
+    transform: translateX(-50%);
+    width: 90%;
+    z-index: 1000;
+    /* Keeps it on top of all other content */
+
+    /* 2. Semi-transparent dark blue background */
+    background: rgba(15, 76, 117, 0.579);
+
+    /* 3. The actual blur effect for elements behind it */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* Safari support */
+
+    /* 4. Subtle glass border and shadow */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+    /* Keeps your current rounded look */
+    border-radius: 50px;
+}
+
+.navtitle {
+    font-size: 30px;
+    color: var(--color-light-bg);
+    font-family: var(--font-titles);
+    font-weight: 600;
+}
+
+.navlist {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    font-family: var(--font-secondary);
+}
+
+.navlist a {
+    color: var(--color-light-bg);
+    padding: 10px 10px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.navlist a:hover {
+    background-color: rgba(42, 41, 41, 0.612);
+}
+
+.hamburger {
+    display: none;
+    color: var(--color-light-bg);
+}
+
+.searchbar {
+    color: var(--color-light-bg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#searchbar {
+    display: none;
+    position: fixed;
+    top: 92px;
+    right: 20px;
+    width: min(420px, calc(100% - 32px));
+    z-index: 1001;
+    color: var(--color-dark-blue, #1f2937);
+}
+
+#searchbar.active {
+    display: block;
+}
+
+.search-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.35);
+    backdrop-filter: blur(2px);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.search-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+body.search-open {
+    overflow: hidden;
+}
+
+.search-form {
+    display: grid;
+    gap: 12px;
+}
+
+.search-form input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(15, 76, 117, 0.2);
+    background: #ffffff;
+    color: #1f2937;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-form input:focus {
+    outline: none;
+    border-color: rgba(92, 106, 196, 0.6);
+    box-shadow: 0 0 0 4px rgba(92, 106, 196, 0.12);
+}
+
+.search-form button {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 999px;
+    background: var(--color-accent, #5c6ac4);
+    color: white;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.search-form button i {
+    margin-right: 8px;
+}
+
+.window-header {
+    padding: 12px 16px;
+    background: var(--color-accent, #5c6ac4);
+    color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.window-body {
+    padding: 18px 16px 22px;
+    background: #ffffff;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.window-body p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* The floating window wrapper */
+.floating-window {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    /* Keeps it on top of other content */
+    font-family: sans-serif;
+}
+
+/* Top header bar */
+.window-header {
+    padding: 10px;
+    background: var(--color-accent, #5c6ac4);
+    color: white;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Content area */
+.window-body {
+    padding: 15px;
+    color: #333;
+}
+
+/* Close button style */
+.close-btn {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+}
+
+.hidden {
+    display: none;
+}
+
+footer {
+    background: linear-gradient(45deg, var(--color-dark-blue), var(--color-warm-blue));
+}
+
+.footer {
+    padding: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 60px;
+    padding: 30px 5%;
+}
+
+.footer .title h1 {
+    font-family: var(--font-titles);
+    color: var(--color-light-bg);
+    font-size: 30px;
+}
+
+.footer .title p {
+    max-width: 300px;
+    margin-top: 5px;
+    line-height: 1.4;
+    font-size: 0.85rem;
+    font-family: var(--font-secondary);
+    color: var(--color-white);
+}
+
+.footer .links {
+    margin: 0px 10px;
+    text-align: center;
+}
+
+.footer .links h3 {
+    font-family: var(--font-titles);
+    color: var(--color-light-bg);
+}
+
+.footer .links ul {
+    list-style-type: none;
+}
+
+.footer li {
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+.footer a {
+    color: var(--color-white);
+    text-decoration: none;
+    padding: 10px 10px;
+    font-family: var(--font-secondary);
+    border-radius: 10px;
+}
+
+footer center {
+    padding: 10px;
+    color: var(--color-white);
+    font-family: var(--font-secondary);
+}
+
+footer .footer-image {
+    width: 100%;
+    height: 800px;
+
+    background-image: url("../img/footerimage.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+footer a:hover {
+    background-color: rgba(42, 41, 41, 0.612);
+}
+
+@media only screen and (max-width: 935px) {
+    .navlist {
+        display: block;
+    }
+
+    .navlist.active a {
+        display: block;
+    }
+
+    .navlist a {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+    .searchbar {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    /* footer */
+    .footer {
+        display: block;
+    }
+
+    .footer .title {
+        text-align: center;
+    }
+
+    .footer .title p {
+        justify-content: center;
+        max-width: 100%;
+    }
+}

@@ -1,0 +1,198 @@
+@import url(variables.css);
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-secondary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-titles);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.contact-section {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    gap: 40px;
+    margin: 100px auto;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.contact-section .left-contactpart,
+.contact-section .right-contactpart {
+    flex: 1 1 560px;
+    max-width: 560px;
+    border-radius: 24px;
+}
+
+.contact-form {
+    width: 100%;
+}
+
+.contact-section .left-contactpart {
+    background: linear-gradient(45deg, var(--color-accent), var(--color-light-bg));
+    color: var(--color-light-bg);
+    padding: 60px 40px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+}
+
+.contact-section .left-contactpart h3 {
+    color: var(--color-accent, #f4c430);
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+}
+
+.contact-section .left-contactpart h1 {
+    margin-bottom: 24px;
+    font-size: 2.75rem;
+    line-height: 1.05;
+}
+
+.contact-section .left-contactpart p {
+    margin-bottom: 32px;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 1rem;
+}
+
+.contact-section .info-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    font-size: 0.98rem;
+    color: rgba(255, 255, 255, 0.96);
+}
+
+.contact-section .info-item i {
+    color: var(--color-accent, #f4c430);
+    min-width: 28px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.contact-section .right-contactpart {
+    background-color: var(--color-white);
+    padding: 48px 40px;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(29, 39, 75, 0.08);
+}
+
+.contact-form {
+    display: grid;
+    gap: 22px;
+}
+
+.contact-form h2 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: var(--color-heading, #1f2937);
+}
+
+.contact-form p {
+    margin: 0 0 24px;
+    color: #586069;
+    line-height: 1.8;
+}
+
+.form-group {
+    display: grid;
+    gap: 10px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 6px;
+}
+
+.contactInput,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 1rem;
+    border: 1px solid #d3d8e2;
+    border-radius: 14px;
+    background: #fbfcff;
+    color: #1f2937;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contactInput:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #5c6ac4;
+    box-shadow: 0 0 0 4px rgba(92, 106, 196, 0.12);
+}
+
+.contact-form textarea {
+    min-height: 160px;
+    resize: vertical;
+}
+
+.submit-button {
+    width: fit-content;
+    padding: 14px 36px;
+    border: none;
+    border-radius: 999px;
+    background: var(--color-accent, #5c6ac4);
+    color: #ffffff;
+    font-size: 0.98rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.submit-button:hover {
+    transform: translateY(-1px);
+    background: #4a55b3;
+}
+
+@media (max-width: 950px) {
+    .contact-section {
+        margin: 60px 16px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .contact-section .left-contactpart,
+    .contact-section .right-contactpart {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 620px) {
+    .contact-section {
+        margin: 40px 12px;
+    }
+
+    .contact-section .left-contactpart,
+    .contact-section .right-contactpart {
+        padding: 40px 20px;
+    }
+
+    .submit-button {
+        width: 100%;
+    }
+}
+

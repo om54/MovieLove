@@ -1,0 +1,71 @@
+{% extends 'main/default.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/AllMoviesList.css' %}">
+{% endblock %}
+
+{% block title %}Search results for {{ query }} - Movie Love{% endblock %}
+
+{% block content %}
+<section class="movies-page">
+    <div class="movies-heading">
+        <div>
+            <h1>Search results{% if query %} for "{{ query }}"{% endif %}</h1>
+            {% if query %}
+            <p>Showing movies that match your search terms.</p>
+            {% else %}
+            <p>Enter a search term to find movies, genres, or cast members.</p>
+            {% endif %}
+        </div>
+        <div class="movies-count">
+            {{ movies.count }} result{{ movies.count|pluralize }}
+        </div>
+    </div>
+
+    {% if movies %}
+    <div class="movies-grid">
+        {% for movie in movies %}
+        <article class="movie-card">
+            <div class="movie-image-wrap">
+                {% if movie.movieSmallImage %}
+                <img src="{{ movie.movieSmallImage.url }}" alt="{{ movie.movieName }}" />
+                {% else %}
+                <div class="movie-image-placeholder">No image</div>
+                {% endif %}
+            </div>
+            <div class="movie-card-body">
+                <h2>{{ movie.movieName }}</h2>
+                <p class="movie-meta">
+                    <span>{{ movie.dateOfRelease }}</span>
+                    <span>{{ movie.movieProducer.ProductionHouseName }}</span>
+                </p>
+                <p class="movie-genres">
+                    {% for genre in movie.movieGenre.all %}
+                        <span>{{ genre.genreName }}</span>{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        <span>No genre</span>
+                    {% endfor %}
+                </p>
+                <p class="movie-cast">
+                    {% if movie.allCast.exists %}
+                        Cast: {% for cast in movie.allCast.all %}{{ cast.castName }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                    {% else %}
+                        Cast information unavailable.
+                    {% endif %}
+                </p>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        {% if query %}
+            <p>No movies found for "{{ query }}". Try a different search term.</p>
+        {% else %}
+            <p>No search query entered yet.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
